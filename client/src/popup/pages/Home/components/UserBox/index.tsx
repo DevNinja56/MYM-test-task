@@ -3,7 +3,7 @@ import React from "react";
 
 const UserBox = ({ id, user }: { id: number; user: IUser }): JSX.Element => {
   return (
-    <div className="px-16 py-6 shadow-lg border my-6 relative">
+    <div className="px-16 py-6 shadow-lg border my-6 relative rounded-lg">
       <p className="absolute top-3 left-3 font-semibold text-xl">{id}</p>
       <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
         <img

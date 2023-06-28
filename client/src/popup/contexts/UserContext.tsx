@@ -14,8 +14,12 @@ import { INDEXED_DB_NAME, OBJECT_STORE_INDEXED_DB } from "@constants/index";
 type PropsContextType = {
   loading: boolean;
   users: IUser[];
+  loadingText: string;
+  insertionStart: boolean;
+  insertionProgress: number;
   setLoading: any;
   setUsers: any;
+  setLoadingText: any;
 };
 
 export const [useProps, CtxProvider] = createCtx<PropsContextType>();
@@ -23,6 +27,9 @@ export const [useProps, CtxProvider] = createCtx<PropsContextType>();
 export const PropsProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<IUser[]>([]);
+  const [loadingText, setLoadingText] = useState<string>("Loading...");
+  const [insertionProgress, setInsertionProgress] = useState<number>(0);
+  const [insertionStart, setInsertionStart] = useState<boolean>(false);
 
   /**
    * Create connection to the IndexedDB
@@ -120,10 +127,14 @@ export const PropsProvider = ({ children }: { children: React.ReactNode }) => {
    */
   const insertionExternalUsers = async (users: IUser[]) => {
     try {
+      setInsertionStart(true);
       for (let i = 0; i < 100; i++) {
-        await createUser(users[i % users.length]);
+        await createUser(users[i % users.length], () =>
+          setInsertionProgress((prevProgress) => prevProgress + 1)
+        );
       }
 
+      setInsertionStart(false);
       getPaginatedUsers();
     } catch (error) {
       toast.error(error.message);
@@ -133,11 +144,12 @@ export const PropsProvider = ({ children }: { children: React.ReactNode }) => {
   /**
    * Save user to the Cloud Database
    */
-  const createUser = async (user: IUser) => {
+  const createUser = async (user: IUser, callback: any) => {
     try {
       const response = await createUserEndpoint(user);
 
       if (response && response.status) {
+        callback();
         return response.data;
       }
     } catch (error) {
@@ -171,8 +183,12 @@ export const PropsProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         loading,
         users,
+        loadingText,
+        insertionProgress,
+        insertionStart,
         setLoading,
         setUsers,
+        setLoadingText,
       }}
     >
       {children}

@@ -1,5 +1,6 @@
 import { parseError } from "@api/integrations/errors";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export const callEndpoint = async (
   url: string,
@@ -26,7 +27,7 @@ export const callEndpoint = async (
     headers: headers,
   })
     .then((res) => res.data)
-    .catch((error) => parseError(error));
+    .catch((error) => toast.error(error.message));
 
   return res;
 };
