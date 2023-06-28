@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/popup/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@constants/*": ["src/popup/constants/*"],
+      "@contexts/*": ["src/popup/contexts/*"],
+      "@pages/*": ["src/popup/pages/*"],
+      "@layout/*": ["src/popup/layout/*"],
+      "@api/*": ["src/popup/api/*"],
+      "@enums/*": ["src/popup/enums/*"],
+      "@routes/*": ["src/popup/routes/*"],
+      "@interfaces/*": ["src/popup/interfaces/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}

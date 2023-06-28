@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Test Task",
+    "description": "Test Task",
+    "version": "1.0.0",
+    "action": {
+        "default_icon": "./assets/images/icon16.png"
+    },
+    "permissions": [
+        "activeTab",
+        "storage",
+        "unlimitedStorage",
+        "tabs"
+    ],
+    "icons": {
+        "16": "./assets/images/icon16.png",
+        "32": "./assets/images/icon32.png",
+        "128": "./assets/images/icon128.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "contentScript.js"
+            ]
+        }
+    ]
+}
