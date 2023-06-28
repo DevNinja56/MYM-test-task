@@ -1,6 +1,6 @@
 # MYM-Chrome-Extension-Test-Task
 
-##### Guidelines for running chrome extension #####
+# Guidelines for running chrome extension
 
 ## Available Scripts
 
@@ -16,7 +16,7 @@ To start the project in production mode, you can run:
 
 ### `npm run build`
 
-##### Guidelines for running backend #####
+# Guidelines for running backend
 
 To install the project dependencies, you can run:
 
